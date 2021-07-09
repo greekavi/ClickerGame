@@ -2,7 +2,7 @@ import React,{useState,useEffect} from "react";
 import { cleanup } from "@testing-library/react";
 function Counter(){
     const [count,setCount]=useState(0);
-    const [seconds,setSeconds]=useState(5);
+    const [seconds,setSeconds]=useState(10);
     const [game,setGame]=useState(1);
     
    function tick(){
@@ -16,30 +16,33 @@ function Counter(){
 
    }
    useEffect(()=>{
-    setSeconds(5);
+    setSeconds(10);
     setCount(0);
    },[game]);
 
    useEffect(() => {     
         if(!seconds) return;
          const timer= setInterval(() => setSeconds(seconds - 1), 1000);
-        return ()=>{clearInterval(timer); console.log("Done")}
+         console.log(timer);
+        return ()=>{clearInterval(timer);}
    },[seconds]);
 
   
     
     return (
-        <div>
+        <div className="Game">
             <h4>Number of Games played: {game}</h4>
             <button onClick={enable}>Reset</button>
-            <h2>Start Clicking</h2>
-            <p>You Clicked <b>{count}</b> times</p>
             <div>
-                <h5>Timer</h5>
+                <h4>Timer</h4>
         <b>{seconds}</b>
       </div>
-      <br/>
-            <button  onClick={tick}>
+      <p>You Clicked <b>{count}</b> times</p>
+            <h2>Start Clicking!</h2>
+            
+            
+    
+            <button id='MainButton'  onClick={tick}>
         Click me
       </button>
             </div>

@@ -3,6 +3,7 @@ import React,{useState} from "react";
 import Counter from './components/Counter';
 import './Styles/Counter.css';
 
+
 function App() {
   const [mounted,setMounted]=useState(false);
   const [button,setButton]=useState("Play Game")
@@ -13,10 +14,10 @@ function App() {
    
  }
   return (
-    <div className="App">
-
+    <div className="App" >
+    <div className="heading">
       <h1>Fastest Clicker First</h1>
-    
+    </div>
       <button onClick={toggle}>{button}</button>
       {mounted && <Counter/>}
     </div>

@@ -1,3 +1,4 @@
+
 .App{
    text-align: center;
  
@@ -5,13 +6,52 @@
     margin-right: auto;
     margin-left: auto;
 }
-.App h1{
-    background-color: aquamarine;
+.heading{
+    background-color: rgb(243, 175, 28,0.5);
+    padding: 15px 15px;
+    margin: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   
+    color: white;
     
 }
+.Game{
+    background-color: white;
+    margin: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
 .App button{
-    background-color: thistle;
+    background-color: rgb(243, 175, 28,0.5);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    font-size: 27px;
+}
+.Game button{
+    background-color: rgba(236, 182, 3, 0.747);
     color: black;
     padding: 10px 20px;
     border: none;
+}
+.Game button:hover{
+    background-color:yellow;
+    
+}
+.App button:hover{
+    background-color: rgb(243, 175, 28);
+    color: black;
+    border: orange 
+}
+#MainButton{
+    padding: 20px;
+    font-size: 30px
+}
+body{
+    background-Image:url(../images/books.jpg);
+    background-Size:cover;
+    background-repeat: no-repeat;
+   
+    
 }
