@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+
+import React,{useState} from "react";
+import Counter from './components/Counter';
+import './Styles/Counter.css';
 
 function App() {
+  const [mounted,setMounted]=useState(false);
+  const [button,setButton]=useState("Play Game")
+
+ function toggle(){
+   setMounted(!mounted);
+   (button=="Play Game")?setButton("Back to Home"):setButton("Play Game");
+   
+ }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h1>Fastest Clicker First</h1>
+    
+      <button onClick={toggle}>{button}</button>
+      {mounted && <Counter/>}
     </div>
   );
 }
