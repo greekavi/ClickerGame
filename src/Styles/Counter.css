@@ -1,8 +1,7 @@
 
 .App{
    text-align: center;
- 
-  width: 300px;
+  width: 400px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -14,6 +13,13 @@
    
     color: white;
     
+}
+.Timer{
+    font-size: 40px;
+    
+}
+.TimerHeading{
+    font-size:20px;
 }
 .Game{
     background-color: white;
