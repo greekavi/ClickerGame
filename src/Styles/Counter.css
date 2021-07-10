@@ -45,6 +45,9 @@
     background-color:yellow;
     
 }
+.stop{
+    color: red;
+}
 .App button:hover{
     background-color: rgb(243, 175, 28);
     color: black;

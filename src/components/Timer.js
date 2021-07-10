@@ -1,9 +1,25 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 function Timer({TimerSeconds}){  
+    const [timeOver,setTimeOver]=useState(false);
+    const [time,setTime]=useState(true);
+    useEffect(()=>{
+      
+        if(!TimerSeconds)
+       {
+        setTimeOver(true);
+        setTime(false)
+       }
+        else
+        {
+        setTime(true);
+        setTimeOver(false)
+        }
+    },[TimerSeconds])
     return(
          <div>
                 
-        <b className="Timer">Timer : {TimerSeconds}</b>
+        {time&&<b className="Timer ">Timer : {TimerSeconds}</b>}
+        {timeOver&&  <b className="Timer stop">Time Up!!!</b>}
       </div>
     );
 }

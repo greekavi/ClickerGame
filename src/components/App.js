@@ -30,11 +30,14 @@ function openForm(){
   (button=="Back to Home")?toggle():setform(!form);
 
 }
+function CloseForm(){
+  setform(!form);
+}
   return (
     <div className="App" >
      
-  <Navbar childbutton={button} onChildClick={openForm}/>
-  {form &&<Form  formClick={setDetails} />}
+  <Navbar childbutton={button} onChildClick={openForm} />
+  {form &&<Form  formClick={setDetails} closeForm={CloseForm}/>}
 
 
       {mounted && <Counter CounterUsername={usename1}/>}
