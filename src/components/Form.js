@@ -1,10 +1,10 @@
 import React,{useState} from "react";
 import './../Styles/Form.css';
+import numbers from './../Data/Age.js';
 function Form({formClick}){  
     const [userName,setUserName]=useState("");
     const [email,setEmail]=useState("");
     const[age,setAge]=useState(20);
-    const numbers=[20,21,22,23,24,25,26,27,28,29];
     const ageList=numbers.map((number)=><option value={number.toString()}>{number}</option>);
 
     const handleUsernameChange=(event)=>{
