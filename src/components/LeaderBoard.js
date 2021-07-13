@@ -4,6 +4,13 @@ import Button from '@material-ui/core/button';
 import './../Styles/LeaderBoard.css';
 import { useTable } from 'react-table'
 import MaterialTable from 'material-table';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper'
 
 function LeaderBoard({leaderboardswitch}){  
     const [users,setUsers]=useState([]);
@@ -30,7 +37,7 @@ function LeaderBoard({leaderboardswitch}){
         getUsers();
     },[]);
    
-    
+
     return(
          <div>
              <div className="modal">
@@ -40,11 +47,29 @@ function LeaderBoard({leaderboardswitch}){
          <div className="modal-content">
          <button id="close" onClick={leaderboardswitch}>X</button>
        
-       <MaterialTable title="Leader Board" data={users} columns={columns}
-       options={{
-           search:false,
-           paging:false
-       }}/>
+         <TableContainer component={Paper}>
+         <h2>Leader Board</h2>
+      <Table  aria-label="simple table">
+        <TableHead>
+          <TableRow>
+          
+            <TableCell ><b>Username</b></TableCell>
+            <TableCell ><b>Score</b></TableCell>
+        
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {users.map((row) => (
+            <TableRow key={row.name}>
+              
+              <TableCell >{row.Username}</TableCell>
+              <TableCell >{row.Score}</TableCell>
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
        
       
        </div></div>
