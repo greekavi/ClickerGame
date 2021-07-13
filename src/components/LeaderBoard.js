@@ -30,6 +30,7 @@ function LeaderBoard({leaderboardswitch}){
         getUsers();
     },[]);
    
+    
     return(
          <div>
              <div className="modal">
