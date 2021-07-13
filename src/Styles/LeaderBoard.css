@@ -7,7 +7,7 @@
     background: #f1f1f1;
     padding: 14px 28px;
     border-radius: 3px;
-    width: 900px;
-   
+    max-width: 700px;
+    min-width: 300px;
     border: solid 15px yellow;
 }
