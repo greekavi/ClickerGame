@@ -41,36 +41,39 @@ function Form({formClick,closeForm}){
     }
     function handleSubmit(e){
         e.preventDefault();
-            
+            console.log("hello");
             let Score;
             let ref = firebase.firestore().collection("Users");
-           // let checkifemailexist=ref.where("Email","==",email);
+            ref.where("Email","==",email).get()
+            .then((querysnapshot)=>{
+                if(querysnapshot.docs.length>0)
+                {  querysnapshot.forEach((doc)=>{
+                   console.log(doc.length);
+                   
+                    
+                        let users=doc.data();
+                        console.log(users);
+                        formClick(users.Username,users.Score);
+                        
+               
+                   
+                   
+                })}
+                else{
+                    ref.add({
+                        Id:uuidv4(),
+                        Username:userName,
+                        Email:email,
+                        Age:age,
+                        Gender:gender,
+                        Score:0
+                    })
+                    formClick(userName,0);
+                }
+            })
+           
             
-           ref.onSnapshot((querySnapshot)=>{
-            
-            let items=[];
-            querySnapshot.forEach((doc)=>{
-                items.push(doc.data());
-            });
-            console.log(items);
-            if(items.find(obj=>obj.Email==email))
-            {
-                let player=items.find(obj=>{ return obj.Email==email});
-                console.log(player.Username);
-                formClick(player.Username,player.Score);
-            }
-            else{
-                ref.add({
-                    Id:uuidv4(),
-                    Username:userName,
-                    Email:email,
-                    Age:age,
-                    Gender:gender,
-                    Score:0
-                })
-                formClick(userName,0)
-            }
-        });
+           
 
    
     }
