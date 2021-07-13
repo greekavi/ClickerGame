@@ -35,7 +35,7 @@ function LeaderBoard({leaderboardswitch}){
     }
     useEffect(()=>{
         getUsers();
-    });
+    },[]);
    
 
     return(
