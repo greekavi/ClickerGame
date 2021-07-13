@@ -1,18 +1,17 @@
 
 .App{
    text-align: center;
-  width: 400px;
+  width: 470px;
     margin-right: auto;
     margin-left: auto;
 }
 .heading{
     background-color: rgb(243, 175, 28,0.5);
-    padding: 15px 15px;
+    padding: 2px;
+    font-size: 30px;
     margin: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   
     color: white;
-    
 }
 .Timer{
     font-size: 25px;

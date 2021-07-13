@@ -5,11 +5,7 @@
 #submit:hover{
     background-color: orangered;
 }
-input[type=text],input[type=email],select{
-padding: 6px;
-border: solid 2px black;
-font-size: 20px;
-}
+
 label{
     font-size: 20px;
 }

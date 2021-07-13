@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\images",
+    "\\src\\Styles"
   ],
+  "SelectedNode": "\\src\\Styles\\Counter.css",
   "PreviewInSolutionExplorer": false
 }
