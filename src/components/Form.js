@@ -44,37 +44,35 @@ function Form({formClick,closeForm}){
             
             let Score;
             let ref = firebase.firestore().collection("Users");
-            let checkifemailexist=ref.where("Email","==",email);
-            console.log(checkifemailexist);
-                if(!checkifemailexist)
-                {
-                    ref.add({
-                        Id:uuidv4(),
-                        Username:userName,
-                        Email:email,
-                        Age:age,
-                        Gender:gender,
-                        Score:0
-                    })
-                }
-                else
-                {
-                  ref.where("Email","==",email).get().then((querySnap)=>{
-                      querySnap.docs.forEach((doc)=>{
-                          let Users=doc.data();
-                          console.log(doc.id);
-                          formClick(Users.Username,Users.Score)
-                      });
-                  });
-                
-                }
-                
-                formClick(userName,0);
-
-          
-                    
-
+           // let checkifemailexist=ref.where("Email","==",email);
             
+           ref.onSnapshot((querySnapshot)=>{
+            
+            let items=[];
+            querySnapshot.forEach((doc)=>{
+                items.push(doc.data());
+            });
+            console.log(items);
+            if(items.find(obj=>obj.Email==email))
+            {
+                let player=items.find(obj=>{ return obj.Email==email});
+                console.log(player.Username);
+                formClick(player.Username,player.Score);
+            }
+            else{
+                ref.add({
+                    Id:uuidv4(),
+                    Username:userName,
+                    Email:email,
+                    Age:age,
+                    Gender:gender,
+                    Score:0
+                })
+                formClick(userName,0)
+            }
+        });
+
+   
     }
 
     return(

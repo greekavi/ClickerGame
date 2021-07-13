@@ -60,7 +60,7 @@ function LeaderBoard({leaderboardswitch}){
         </TableHead>
         <TableBody>
           {users.map((row) => (
-            <TableRow key={row.name}>
+            <TableRow key={row.Username}>
               
               <TableCell >{row.Username}</TableCell>
               <TableCell >{row.Score}</TableCell>

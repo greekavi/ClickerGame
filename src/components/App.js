@@ -21,7 +21,8 @@ function App() {
 
 }
 function setDetails(username,score){
-
+console.log(username);
+console.log(score);
 setusername(username);
 setScore(score);
 openForm();
