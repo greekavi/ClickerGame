@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import Button from '@material-ui/core/button';
+import Button from '@material-ui/core/Button';
 import LeaderBoard from "./LeaderBoard";
 import './../Styles/Navbar.css';
 function Navbar({onChildClick,childbutton}){

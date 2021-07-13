@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import Button from '@material-ui/core/button';
+import Button from '@material-ui/core/Button';
 function Reset({ResetGame,ResetEnable}){  
     return(
 <div>

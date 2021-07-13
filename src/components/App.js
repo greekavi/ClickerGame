@@ -2,7 +2,7 @@
 import React,{useState,useCallback} from "react";
 import Counter from './Counter';
 import './../Styles/Counter.css';
-import Button from '@material-ui/core/button';
+import Button from '@material-ui/core/Button';
 import Navbar from './Navbar';
 import Form from './Form';
 

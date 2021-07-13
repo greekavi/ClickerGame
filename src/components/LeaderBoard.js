@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import firebase from './firebase';
-import Button from '@material-ui/core/button';
+import Button from '@material-ui/core/Button';
 import './../Styles/LeaderBoard.css';
 import { useTable } from 'react-table'
 import MaterialTable from 'material-table';
