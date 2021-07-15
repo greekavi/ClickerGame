@@ -33,39 +33,44 @@ function Counter({CounterUsername,CounterScore,CounterGame}){
     function enable(){
         setModel(!modal);
     }
-
+useEffect(()=>{
+    if(seconds==0)
+    {
+    if(CounterScore<count)
+    {
+     const ref = firebase.firestore().collection("Users");
+        ref.where("Username","==",CounterUsername).get().then((querySnap)=>{
+            querySnap.docs.forEach((doc)=>{
+                let Users=doc.id;
+                ref.doc(Users).update({
+                    Score:count
+                })
+                
+            });
+        });
+        const ref1 = firebase.firestore().collection("Games");
+        ref1.where("Gameid","==",CounterGame).get().then((querySnap)=>{
+            
+            querySnap.docs.forEach((doc)=>{
+                let Userid=doc.id;
+                ref1.doc(Userid).update({
+                   [CounterUsername]:{ Score:count,Username:CounterUsername}
+                })
+                
+                
+            });
+        });
+        
+    }}
+},[seconds])
 
    useEffect(() => { 
     if(!seconds) return;    
       
        
-         const timer= setInterval(() => setSeconds(seconds - 1), 1000);
-         if(CounterScore<count)
-   {
-    const ref = firebase.firestore().collection("Users");
-       ref.where("Username","==",CounterUsername).get().then((querySnap)=>{
-           querySnap.docs.forEach((doc)=>{
-               let Users=doc.id;
-               ref.doc(Users).update({
-                   Score:count
-               })
-               
-           });
-       });
-       const ref1 = firebase.firestore().collection("Games");
-       ref1.where("Gameid","==",CounterGame).get().then((querySnap)=>{
-           
-           querySnap.docs.forEach((doc)=>{
-               let Userid=doc.id;
-               ref1.doc(Userid).update({
-                  [CounterUsername]:{ Score:count,Username:CounterUsername}
-               })
-               
-               
-           });
-       });
-       
-   }
+        
+        
+   const timer= setInterval(() => setSeconds(seconds - 1), 1000);
         return ()=>{clearInterval(timer);}
    },[seconds]);
 
