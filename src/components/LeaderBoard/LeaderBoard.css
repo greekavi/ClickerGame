@@ -1,13 +1,13 @@
 .modal-content {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
     padding: 14px 28px;
-    border-radius: 3px;
+    border-radius: 40px;
     max-width: 700px;
     min-width: 300px;
-    border: solid 15px yellow;
+    border: solid 15px #aa076b ;
 }

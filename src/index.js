@@ -1,16 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
+import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme } from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/core';
-import {orange,yellow}from '@material-ui/core/colors';
+import {orange,yellow,amber}from '@material-ui/core/colors';
 
 const theme=createTheme({
   palette: {
-    primary: {main:'#e65100'},
-    secondary: yellow,
+    primary: {main:'#62055f'},
+    secondary:{ main:'#f688f7'},
   }
 })
 

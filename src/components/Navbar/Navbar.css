@@ -1,0 +1,16 @@
+.button{
+    display: inline-block;
+    margin:2px;
+    
+}
+.heading1 p{
+    background-color: white;
+    border-radius: 40px;
+    padding: 10px;
+    border:5px solid white;
+    font-size: 40px;
+    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif; 
+    margin: 10px;
+    
+    color: #62055f;
+}

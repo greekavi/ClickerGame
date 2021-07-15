@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useCallback} from "react";
-import './../Styles/Ready.css';
+import './Ready.css';
 function Ready({ReadyModal}){  
     const [timer,setTimer]=useState(3);
 
