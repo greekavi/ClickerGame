@@ -87,7 +87,7 @@ useEffect(()=>{
         <LeaderBoard  Leadercommon={childLeader} leadergame={CounterGame} />
         </div>
        {modal&&<Ready ReadyModal={readyModal1} />}
-           <h3 className="Welcome">Welcome {CounterUsername} <br/><b> Game Code:{CounterGame}</b></h3>
+           <h3 className="Welcome">Welcome {CounterUsername}</h3>
            
            
             <Timer TimerSeconds={seconds} />

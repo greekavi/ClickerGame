@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import Navbar from './../Navbar/Navbar';
 import Form from './../Form/Form';
 import TextField from '@material-ui/core/TextField';
+import './App.css';
 
 
 
@@ -19,7 +20,7 @@ function App() {
   const [commonleader,setCommonLeader]=useState(true);
   const [gamecode,setGamecode]=useState("");
   const [gamestatus,setgamestatus]=useState("S");
- 
+  const [play,setplay]=useState(true);
 
  function toggle(){
    setMounted(!mounted);
@@ -41,8 +42,6 @@ function App() {
    
  }
 function setDetails(username,score,game){
-console.log(username);
-console.log(score);
 setusername(username);
 setScore(score);
 setGame1(game);
@@ -54,7 +53,12 @@ function handleGameCodeChange(event){
 }
 function openForm(){
   
-  (button=="Home")?toggle():setform(!form);
+  if(button=="Home")
+  {toggle();
+  setplay(true)}
+  else
+  {setform(!form);
+  setplay(false)};
  
 
 }
@@ -65,15 +69,15 @@ function CloseForm(){
     
     <div className="App" >
     
-  <Navbar childbutton={button} onChildClick={openForm} childLeader={commonleader} childgame={game1} childmount={mounted} />
+  <Navbar childbutton={button} onChildClick={openForm} childLeader={commonleader} childgame={game1} childmount={mounted} childplay={play}/>
   
   {form &&<Form  formClick={setDetails} closeForm={CloseForm} formgamestatus={gamestatus} formgamecode={gamecode} />}
 
 
       {mounted && <Counter CounterUsername={usename1}  CounterScore={score1} CounterGame={game1}  />}
 
-      <input placeholder="Game Code" id="gamecode"  color= "secondary" value={gamecode} onChange={handleGameCodeChange} />
-      <button onClick={goToGameRoom}>Enter</button><br/><br/>
+     {!mounted&& <div id="gamecode1"><input placeholder="Game Code" id="gamecode"  color= "secondary" value={gamecode} onChange={handleGameCodeChange} />
+      <button onClick={goToGameRoom}>Enter</button><br/><br/></div>}
     </div>
   );
 }

@@ -9,6 +9,23 @@
     
 }
 
+#playbutton{
+    position: relative;
+    margin-top: 150px;
+
+
+    text-align: center;
+    padding: 25px;
+    
+}
+
+#leaderposition{
+    margin-top:50px;
+}
+
+#homebutton{
+    margin-top:-20px;
+}
 .heading1 p{
     background-color: white;
     border-radius: 40px;

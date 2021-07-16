@@ -12,6 +12,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { TableSortLabel } from '@material-ui/core';
+import {DataGrid} from '@material-ui/data-grid';
 
 
 function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){  
@@ -19,7 +20,20 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
     const [loading,setLoading]=useState(false);
     const ref=firebase.firestore().collection("Users");
     const ref1=firebase.firestore().collection("Games");
-    const columns=[{title:'UserName',field:'Username'},{title:'Score',field:'Score'}]
+    const data = React.useMemo( () => users, [] )
+
+    const columns = [
+        {
+          title: 'UserName',
+          accessor: 'Username', // accessor is the "key" in the data
+        },
+        {
+          title: 'Score',
+          accessor: 'Score',
+        },
+      ]
+
+    
  
     function getUsers(){
 
@@ -31,7 +45,8 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
                 items.push(doc.data());
             });
             console.log(items);
-            setUsers(items);
+            let sortedData = items.sort((a, b) => b.Score - a.Score)
+            setUsers(sortedData);
             setLoading(false);
         });}
         else{
@@ -51,7 +66,8 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
             }
           }
           console.log(array);
-          setUsers(array);
+          let sortedDat1 = array.sort((a, b) => b.Score - a.Score)
+          setUsers(sortedDat1);
       });}
        
     }
@@ -61,27 +77,33 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
    
 
     return(
-         <div>
-             
-         
-         
-         
+         <div>       
          <div className="modal-content2">
          <button id="close" onClick={leaderboardswitch}>X</button>
        <div className="leadertable">
-        <MaterialTable title="LeaderBoard"
-        data={users}
-        columns={columns}
-        
-        options={{
-          search:false,
-          paging:false,
-          sort:{
-            field:'Score',
-
-          }
+       <TableContainer component={Paper}>
+         <h2>Leader Board</h2>
+      <Table  aria-label="simple table">
+        <TableHead>
+          <TableRow>
           
-        }}/>
+            <TableCell ><b>Username</b></TableCell>
+            <TableCell ><b>Score</b></TableCell>
+        
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {users.map((row) => (
+            <TableRow key={row.Username}>
+              
+              <TableCell >{row.Username}</TableCell>
+              <TableCell >{row.Score}</TableCell>
+             
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
        </div>
       
        </div></div>
