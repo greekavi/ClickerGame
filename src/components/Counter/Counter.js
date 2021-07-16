@@ -84,7 +84,7 @@ useEffect(()=>{
     return (
         <div className="Game">
         <div className="Leader">
-        <LeaderBoard  Leadercommon={childLeader} leadergame={CounterGame} leaderseconds={updatescore}/>
+        <LeaderBoard  Leadercommon={childLeader} leadergame={CounterGame} leaderseconds={seconds}/>
         </div>
        {modal&&<Ready ReadyModal={readyModal1} />}
            <h3 className="Welcome">Welcome {CounterUsername} <br/><b> Game Code:{CounterGame}</b></h3>
