@@ -13,7 +13,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { TableSortLabel } from '@material-ui/core';
 
-function LeaderBoard({leaderboardswitch,Leadercommon,leadergame,leaderseconds}){  
+
+function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){  
     const [users,setUsers]=useState([]);
     const [loading,setLoading]=useState(false);
     const ref=firebase.firestore().collection("Users");
@@ -56,7 +57,7 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame,leaderseconds}){
     }
     useEffect(()=>{
         getUsers();
-    },[Leadercommon,leaderseconds]);
+    });
    
 
     return(
@@ -67,31 +68,21 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame,leaderseconds}){
          
          <div className="modal-content2">
          <button id="close" onClick={leaderboardswitch}>X</button>
-       
-         <TableContainer component={Paper}>
-         <h2>Leader Board</h2>
-      <Table  aria-label="simple table">
-        <TableHead>
-          <TableRow>
-          
-            <TableCell ><b>Username</b></TableCell>
-            <TableCell ><b>Score</b></TableCell>
+       <div className="leadertable">
+        <MaterialTable title="LeaderBoard"
+        data={users}
+        columns={columns}
         
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users.map((row) => (
-            <TableRow key={row.Username}>
-              
-              <TableCell >{row.Username}</TableCell>
-              <TableCell >{row.Score}</TableCell>
-             
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-       
+        options={{
+          search:false,
+          paging:false,
+          sort:{
+            field:'Score',
+
+          }
+          
+        }}/>
+       </div>
       
        </div></div>
        

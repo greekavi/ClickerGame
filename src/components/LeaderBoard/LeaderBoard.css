@@ -13,3 +13,8 @@
     overflow: scroll;
     border: solid 15px #aa076b ;
 }
+.leadertable{
+    padding-top:20px; 
+    min-width: 250px;
+    max-width: 600px;
+}

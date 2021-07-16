@@ -17,7 +17,7 @@ function Counter({CounterUsername, CounterScore,CounterGame}){
     const [game,setGame]=useState(0);
     const [modal,setModel]=useState(true);
     const childLeader=false;
-    const [updatescore,setUpdatescore]=useState(1);
+  
     
    function tick(){
        if(!seconds) return;
@@ -27,7 +27,7 @@ function Counter({CounterUsername, CounterScore,CounterGame}){
    function readyModal1(){
     setModel(!modal);
     setGame(game+1);
-    setUpdatescore(updatescore+1);
+   
     setSeconds(10);
     setCount(0);
   
@@ -61,7 +61,7 @@ useEffect(()=>{
                    [CounterUsername]:{ Score:count,Username:CounterUsername}
                 })
                 
-                setUpdatescore(updatescore+1);
+                
             });
         });
         
@@ -84,7 +84,7 @@ useEffect(()=>{
     return (
         <div className="Game">
         <div className="Leader">
-        <LeaderBoard  Leadercommon={childLeader} leadergame={CounterGame} leaderseconds={seconds}/>
+        <LeaderBoard  Leadercommon={childLeader} leadergame={CounterGame} />
         </div>
        {modal&&<Ready ReadyModal={readyModal1} />}
            <h3 className="Welcome">Welcome {CounterUsername} <br/><b> Game Code:{CounterGame}</b></h3>
