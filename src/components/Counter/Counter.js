@@ -4,18 +4,20 @@ import Timer from './../Timer/Timer';
 import Clicker from './../Clicker/Clicker';
 import Reset from './../Reset/Reset';
 import Ready from './../Ready/Ready';
+import LeaderBoard from './../LeaderBoard/LeaderBoard';
 import Button from "@material-ui/core";
 import 'firebase/firestore';
 import firebase from 'firebase/app';
 
 
 
-function Counter({CounterUsername,CounterScore,CounterGame}){
+function Counter({CounterUsername, CounterScore,CounterGame}){
     const [count,setCount]=useState(0);
     const [seconds,setSeconds]=useState(10);
     const [game,setGame]=useState(0);
     const [modal,setModel]=useState(true);
-
+    const childLeader=false;
+    const [updatescore,setUpdatescore]=useState(1);
     
    function tick(){
        if(!seconds) return;
@@ -25,6 +27,7 @@ function Counter({CounterUsername,CounterScore,CounterGame}){
    function readyModal1(){
     setModel(!modal);
     setGame(game+1);
+    setUpdatescore(updatescore+1);
     setSeconds(10);
     setCount(0);
   
@@ -34,6 +37,7 @@ function Counter({CounterUsername,CounterScore,CounterGame}){
         setModel(!modal);
     }
 useEffect(()=>{
+    
     if(seconds==0)
     {
     if(CounterScore<count)
@@ -57,11 +61,14 @@ useEffect(()=>{
                    [CounterUsername]:{ Score:count,Username:CounterUsername}
                 })
                 
-                
+                setUpdatescore(updatescore+1);
             });
         });
         
-    }}
+        
+    }
+}
+    
 },[seconds])
 
    useEffect(() => { 
@@ -76,6 +83,9 @@ useEffect(()=>{
 
     return (
         <div className="Game">
+        <div className="Leader">
+        <LeaderBoard  Leadercommon={childLeader} leadergame={CounterGame} leaderseconds={updatescore}/>
+        </div>
        {modal&&<Ready ReadyModal={readyModal1} />}
            <h3 className="Welcome">Welcome {CounterUsername} <br/><b> Game Code:{CounterGame}</b></h3>
            

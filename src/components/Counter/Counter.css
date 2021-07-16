@@ -57,6 +57,22 @@ max-width: 500px;
     border: none;
     font-size: 20px;
 }
+@media only screen and (max-width:768px)
+{
+.Leader .modal-content2
+{
+top: 950px;
+left: 50%;
+}
+}
+@media only screen and (min-width:768px)
+{
+    .Leader .modal-content2
+{
+    right:  -20px;
+    top: 50%;
+}
+}
 .Game button{
     background-color: #f688f7;
     border-radius: 40px;

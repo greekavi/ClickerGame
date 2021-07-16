@@ -1,7 +1,7 @@
-.modal-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+.modal-content2 {
+    position: absolute;
+    
+
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
@@ -9,5 +9,7 @@
     border-radius: 40px;
     max-width: 600px;
     min-width: 250px;
+    height: 80%;
+    overflow: scroll;
     border: solid 15px #aa076b ;
 }

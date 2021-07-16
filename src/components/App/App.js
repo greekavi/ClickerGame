@@ -24,11 +24,11 @@ function App() {
  function toggle(){
    setMounted(!mounted);
    if(button=="Play Game"){
-     setCommonLeader(false);
+     
      setButton("Home");
     }
    else{
-     setCommonLeader(true);
+    
      setButton("Play Game");
      setgamestatus("S");
     }
@@ -70,7 +70,7 @@ function CloseForm(){
   {form &&<Form  formClick={setDetails} closeForm={CloseForm} formgamestatus={gamestatus} formgamecode={gamecode} />}
 
 
-      {mounted && <Counter CounterUsername={usename1} CounterScore={score1} CounterGame={game1}  />}
+      {mounted && <Counter CounterUsername={usename1}  CounterScore={score1} CounterGame={game1}  />}
 
       <input placeholder="Game Code" id="gamecode"  color= "secondary" value={gamecode} onChange={handleGameCodeChange} />
       <button onClick={goToGameRoom}>Enter</button><br/><br/>

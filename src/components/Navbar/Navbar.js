@@ -20,7 +20,12 @@ function Navbar({onChildClick,childbutton,childLeader,childgame}){
     </div>
      <div className="button"> <Button onClick={onChildClick}>{childbutton}</Button></div>
      <div className="button"> <Button onClick={Leaderboardswitch}>Leaderboard</Button></div>
-{leader&&<LeaderBoard leaderboardswitch={Leaderboardswitch} Leadercommon={childLeader} leadergame={childgame}/>}
+     
+{leader&&<div className="Leader2">
+<div className="modal">
+<div  className="overlay"></div><LeaderBoard leaderboardswitch={Leaderboardswitch} Leadercommon={childLeader} leadergame={childgame}/></div>
+</div>}
+
 </div>
 
     );

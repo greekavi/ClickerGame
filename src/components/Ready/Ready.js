@@ -17,7 +17,7 @@ function Ready({ReadyModal}){
          <div>
      <div className="modal">
           <div  className="overlay"></div>
-          <div className="modal-content">
+          <div className="modal-content1">
             <h4>Get Ready In.......</h4>
             <h2 >
            {timer}

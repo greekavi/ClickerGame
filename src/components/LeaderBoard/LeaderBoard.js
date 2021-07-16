@@ -10,9 +10,10 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper';
+import { TableSortLabel } from '@material-ui/core';
 
-function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){  
+function LeaderBoard({leaderboardswitch,Leadercommon,leadergame,leaderseconds}){  
     const [users,setUsers]=useState([]);
     const [loading,setLoading]=useState(false);
     const ref=firebase.firestore().collection("Users");
@@ -55,16 +56,16 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
     }
     useEffect(()=>{
         getUsers();
-    },[]);
+    },[Leadercommon,leaderseconds]);
    
 
     return(
          <div>
-             <div className="modal">
+             
          
-         <div  className="overlay"></div>
          
-         <div className="modal-content">
+         
+         <div className="modal-content2">
          <button id="close" onClick={leaderboardswitch}>X</button>
        
          <TableContainer component={Paper}>
@@ -94,7 +95,7 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
       
        </div></div>
        
-      </div>
+      
       
     );
 }
