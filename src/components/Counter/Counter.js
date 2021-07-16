@@ -49,7 +49,7 @@ useEffect(()=>{
                 ref.doc(Users).update({
                     Score:count
                 })
-                setUpdatescore(updatescore+1);
+                
             });
         });
         const ref1 = firebase.firestore().collection("Games");
