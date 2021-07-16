@@ -65,7 +65,7 @@ function CloseForm(){
     
     <div className="App" >
     
-  <Navbar childbutton={button} onChildClick={openForm} childLeader={commonleader} childgame={game1} />
+  <Navbar childbutton={button} onChildClick={openForm} childLeader={commonleader} childgame={game1} childmount={mounted} />
   
   {form &&<Form  formClick={setDetails} closeForm={CloseForm} formgamestatus={gamestatus} formgamecode={gamecode} />}
 

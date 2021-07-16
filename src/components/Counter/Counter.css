@@ -61,7 +61,7 @@ max-width: 500px;
 {
 .Leader .modal-content2
 {
-top: 950px;
+top: 1000px;
 left: 50%;
 }
 }
@@ -69,7 +69,7 @@ left: 50%;
 {
     .Leader .modal-content2
 {
-    right:  -20px;
+    right:  -10%;
     top: 50%;
 }
 }

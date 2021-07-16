@@ -5,7 +5,10 @@
 }
 .Leader2 .modal-content2{
     left: 50%;
+    top:50%;
+    
 }
+
 .heading1 p{
     background-color: white;
     border-radius: 40px;

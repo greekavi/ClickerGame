@@ -6,7 +6,7 @@ import Icon from "@material-ui/core/Icon";
 
 
 
-function Navbar({onChildClick,childbutton,childLeader,childgame}){
+function Navbar({onChildClick,childbutton,childLeader,childgame,childmount}){
     const [leader,setLeader]=useState(false);
     function Leaderboardswitch() {
         setLeader(!leader);
@@ -19,7 +19,7 @@ function Navbar({onChildClick,childbutton,childLeader,childgame}){
       <p>Fastest Clicker First</p>
     </div>
      <div className="button"> <Button onClick={onChildClick}>{childbutton}</Button></div>
-     <div className="button"> <Button onClick={Leaderboardswitch}>Leaderboard</Button></div>
+     {(!childmount)&&<div className="button"> <Button onClick={Leaderboardswitch}>Leaderboard</Button></div>}
      
 {leader&&<div className="Leader2">
 <div className="modal">
