@@ -1,4 +1,3 @@
-
 import React,{useState,useCallback} from "react";
 import Counter from './../Counter/Counter';
 import './../Counter/Counter.css';
@@ -64,6 +63,7 @@ function openForm(){
 }
 function CloseForm(){
   setform(!form);
+  setplay(true);
 }
   return (
     
@@ -77,9 +77,8 @@ function CloseForm(){
       {mounted && <Counter CounterUsername={usename1}  CounterScore={score1} CounterGame={game1}  />}
 
      {!mounted&& <div id="gamecode1"><input placeholder="Game Code" id="gamecode"  color= "secondary" value={gamecode} onChange={handleGameCodeChange} />
-      <button onClick={goToGameRoom}>Enter</button><br/><br/></div>}
-    </div>
-  );
+      <button id="enterbutton" onClick={goToGameRoom}>Enter</button><br/><br/></div>}
+    </div>  );
 }
 
 export default App;

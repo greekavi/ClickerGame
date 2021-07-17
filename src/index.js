@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createTheme } from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/core';
 import {orange,yellow,amber}from '@material-ui/core/colors';
+import * as serviceWorker from './serviceWorker';
 
 const theme=createTheme({
   palette: {
@@ -28,4 +29,5 @@ ReactDOM.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+serviceWorker.register();
 reportWebVitals();

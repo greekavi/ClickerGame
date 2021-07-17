@@ -10,7 +10,7 @@
     max-width: 600px;
     min-width: 250px;
     height: 80%;
-    overflow: scroll;
+    overflow: hidden;
     border: solid 15px #aa076b ;
 }
 .leadertable{

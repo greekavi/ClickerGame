@@ -21,13 +21,8 @@ max-width: 500px;
     margin-left: auto;
     margin-right: auto;
 }
-#gamecode{
-    background-color: white;
-    margin: 10px;
-    padding: 5px;
-    font-size: 20px;
-    border-radius: 40px;
-    border:none;
+#enterbutton{
+    padding: 4px;
 }
 
 .Welcome b{

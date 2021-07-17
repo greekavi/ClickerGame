@@ -24,8 +24,12 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
     const [email,setEmail]=useState("");
     const[age,setAge]=useState(20);
     const[gender,setGender]=useState("Male");
+    const[signIn,setSignIn]=useState(true);
     
 
+    function opensignin(){
+        setSignIn(false);
+    }
     const ageList=numbers.map((number)=><MenuItem key={number.toString()} value={number.toString()} displayEmpty>{number}</MenuItem>);
     const genderList=genders.map((gender)=><FormControlLabel key={gender.toString()} value={gender.toString()} control={<Radio/>} label={gender.toString()}/>);
 
@@ -80,7 +84,7 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
             console.log("hello");
             let Score;
             let ref = firebase.firestore().collection("Users");
-            ref.where("Email","==",email).get()
+            ref.where("Username","==",userName).get()
             .then((querysnapshot)=>{
                 if(querysnapshot.docs.length>0)
                 {  querysnapshot.forEach((doc)=>{
@@ -129,12 +133,14 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
           
           <div className="modal-content">
           <button id="close" onClick={closeForm}>X</button>
+          <Typography color="primary" id="signintext" variant="h5">Already have an account?!</Typography>
+           <Button id="submit" id="signin" onClick={opensignin}>Sign In</Button>
           <form>
             <Typography variant="h5" color="primary">Enter Your Details</Typography>
            <br/>
            <TextField label="User Name" variant="outlined"  color= "primary" value={userName} onChange={handleUsernameChange} /><br/><br/>
            
-           <TextField label="Email" variant="outlined"  color= "primary" value={email} onChange={handleEmailChange}/><br/><br/>
+          {signIn&&<div> <TextField label="Email" variant="outlined"  color= "primary" value={email} onChange={handleEmailChange}/><br/><br/>
            
            <Typography color="primary" variant="h5">Select Age</Typography><br/>
            <Select value={age} onChange={handleAgeChange}>{ageList}</Select><br/><br/>
@@ -142,8 +148,10 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
               
            <Typography color="primary" variant="h5">Select Gender</Typography><br/>
            <RadioGroup onChange={handleGenderChange}>{genderList}</RadioGroup>
-           <br/><br/>
+           <br/><br/></div>}
            <Button id="submit" onClick={handleSubmit}>Submit</Button>
+           
+           
            </form>
           </div>
         </div>
