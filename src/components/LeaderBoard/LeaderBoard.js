@@ -17,10 +17,8 @@ import {DataGrid} from '@material-ui/data-grid';
 
 function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){  
     const [users,setUsers]=useState([]);
-    const [loading,setLoading]=useState(false);
     const ref=firebase.firestore().collection("Users");
     const ref1=firebase.firestore().collection("Games");
-    const data = React.useMemo( () => users, [] )
 
     const columns = [
         {
@@ -39,15 +37,15 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
 
         if(Leadercommon){
         ref.onSnapshot((querySnapshot)=>{
-            setLoading(true);
+           
             const items=[];
             querySnapshot.forEach((doc)=>{
                 items.push(doc.data());
             });
-            console.log(items);
+           
             let sortedData = items.sort((a, b) => b.Score - a.Score)
             setUsers(sortedData);
-            setLoading(false);
+          
         });}
         else{
         ref1.where("Gameid","==",leadergame).get().then((querySnapshot)=>{
@@ -57,7 +55,7 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
           querySnapshot.forEach((doc)=>{
               items.push(doc.data());
           });
-          console.log(items[0]);
+         
           let use=items[0]
           for(let key in use){ 
             if(!(key=='Gameid' ))
@@ -65,15 +63,22 @@ function LeaderBoard({leaderboardswitch,Leadercommon,leadergame}){
               array.push(use[key])
             }
           }
-          console.log(array);
+         
           let sortedDat1 = array.sort((a, b) => b.Score - a.Score)
           setUsers(sortedDat1);
       });}
        
     }
     useEffect(()=>{
+     
         getUsers();
+        
+     
+     
     });
+
+ 
+     
    
 
     return(

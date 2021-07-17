@@ -1,11 +1,7 @@
 {
   "name": "Fastest-Clicker",
   "short_name": "Clicker",
-  "theme_color": "#000000",
-  "background_color": "#000000",
-  "display": "standalone",
-  "scope": "/",
-  "start_url": "/",
+  
   "icons": [
  
     {
@@ -18,6 +14,10 @@
       "type": "image/png",
       "sizes": "512x512"
     }
-  ]
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone",
+  "start_url": "."
  
 }
