@@ -1,7 +1,6 @@
 export default function serviceworker(){
 
   let swUrl = `${process.env.PUBLIC_URL}/sw.js`
- 
 
     if('serviceWorker' in navigator){
       window.addEventListener('load',function(){
