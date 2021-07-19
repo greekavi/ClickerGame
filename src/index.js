@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createTheme } from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/core';
 import {orange,yellow,amber}from '@material-ui/core/colors';
-import * as serviceworker from './serviceworker';
+import serviceworker from './serviceworker';
 
 const theme=createTheme({
   palette: {
@@ -31,4 +31,4 @@ ReactDOM.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
 reportWebVitals();
-serviceworker.register();
+serviceworker();
