@@ -14,9 +14,9 @@ import {BrowserRouter as Router,Route,Switch, useParams,useLocation} from 'react
 
 function Counter(){
      const location=useLocation();
-     let usename1=location.state.countusename;
-     let game1=location.state.countgame;
-     let score1=location.state.countscore;
+     let username=location.state.countusename;
+     let gameCode=location.state.countgame;
+     let score=location.state.countscore;
     
     const [count,setCount]=useState(0);
     const [seconds,setSeconds]=useState(10);
@@ -46,10 +46,10 @@ useEffect(()=>{
     
     if(seconds==0)
     {
-    if(score1<count)
+    if(score<count)
     {
      const ref = firebase.firestore().collection("Users");
-        ref.where("Username","==",usename1).get().then((querySnap)=>{
+        ref.where("Username","==",username).get().then((querySnap)=>{
             querySnap.docs.forEach((doc)=>{
                 let Users=doc.id;
                 ref.doc(Users).update({
@@ -59,12 +59,12 @@ useEffect(()=>{
             });
         });
         const ref1 = firebase.firestore().collection("Games");
-        ref1.where("Gameid","==",game1).get().then((querySnap)=>{
+        ref1.where("Gameid","==",gameCode).get().then((querySnap)=>{
             
             querySnap.docs.forEach((doc)=>{
                 let Userid=doc.id;
                 ref1.doc(Userid).update({
-                   [usename1]:{ Score:count,Username:usename1}
+                   [username]:{ Score:count,Username:username}
                 })
                 
                 
@@ -82,7 +82,7 @@ useEffect(()=>{
       
        
         
-    console.log(usename1);
+    console.log(username);
    const timer= setInterval(() => setSeconds(seconds - 1), 1000);
         return ()=>{clearInterval(timer);}
    },[seconds]);
@@ -90,10 +90,10 @@ useEffect(()=>{
     return (
         <div className="Game">
         <div className="Leader">
-        <LeaderBoard  Leadercommon={childLeader} leadergame={game1} />
+        <LeaderBoard  Leadercommon={childLeader} leadergame={gameCode} />
         </div>
        {modal&&<Ready ReadyModal={readyModal1} />}
-           <h3 className="Welcome">Welcome {usename1}</h3>
+           <h3 className="Welcome">Welcome {username}</h3>
            
            
             <Timer TimerSeconds={seconds} />

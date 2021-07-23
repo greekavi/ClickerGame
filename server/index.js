@@ -12,7 +12,11 @@ var cors = require("cors")
 const app = express()
 const nodemailer = require("nodemailer")
 const sendGridTransport = require("nodemailer-sendgrid-transport");
+const apikey=require("./apikey");
 let ref = db.collection("OTP");
+
+
+
 
 
 app.use(cors())
@@ -23,7 +27,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.json())
 const transporter = nodemailer.createTransport(sendGridTransport({
 auth:{
-api_key:'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'
+api_key:apikey.API_KEY
 }
 }))
 function generateOtp(email){
