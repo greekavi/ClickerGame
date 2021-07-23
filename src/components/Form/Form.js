@@ -14,8 +14,10 @@ import Typography from '@material-ui/core/Typography';
 import 'firebase/firestore';
 import firebase from 'firebase/app';
 import {v4 as uuidv4} from 'uuid';
+import emailjs from 'emailjs-com';
 
 
+//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
 
 
 function Form({formClick,closeForm,formgamecode,formgamestatus}){  
@@ -24,11 +26,18 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
     const [email,setEmail]=useState("");
     const[age,setAge]=useState(20);
     const[gender,setGender]=useState("Male");
-    const[signIn,setSignIn]=useState(true);
-    
+    const[signIn,setSignIn]=useState(false);
+    const [enterotp,setEnterotp]=useState(false);
+    const [otp,setOtp]=useState("");
 
+   
+    
+    //let tokenparams={to_name:"User",from_name:"Clicker Game",message:"",reply_to:""}
+    
+    const ref = firebase.firestore().collection("Users");
+    const ref2 =firebase.firestore().collection("OTP")
     function opensignin(){
-        setSignIn(false);
+        setSignIn(true);
     }
     const ageList=numbers.map((number)=><MenuItem key={number.toString()} value={number.toString()} displayEmpty>{number}</MenuItem>);
     const genderList=genders.map((gender)=><FormControlLabel key={gender.toString()} value={gender.toString()} control={<Radio/>} label={gender.toString()}/>);
@@ -44,6 +53,9 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
     }
     const handleGenderChange=(event)=>{
         setGender(event.target.value)
+    }
+    const handleOtpChange=(event)=>{
+        setOtp(event.target.value)
     }
     function makeid() {
         var text = "";
@@ -79,49 +91,92 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
         });
     });
     }
-    function handleSubmit(e){
+    function handleotp(e){
         e.preventDefault();
-            console.log("hello");
-            let Score;
-            let ref = firebase.firestore().collection("Users");
-            ref.where("Username","==",userName).get()
-            .then((querysnapshot)=>{
-                if(querysnapshot.docs.length>0)
-                {  querysnapshot.forEach((doc)=>{
-                   console.log(doc.length);
-                        let users=doc.data();
-                        console.log(users);
-                        let game;
-                        console.log(formgamestatus);
-                        if(formgamestatus=="S")
-                         game=createGame(users.Email,users.Score,users.Username);
-                        else{
-                            addUser(users.Score,users.Username,formgamecode);
-                             game=formgamecode;
-
-                        }
-                        formClick(users.Username,users.Score,game); 
-                })}
-                else{
-                    ref.add({
-                        Id:uuidv4(),
-                        Username:userName,
-                        Email:email,
-                        Age:age,
-                        Gender:gender,
-                        Score:0
-                    })
+        let users;
+        let id;
+        console.log(otp);
+        console.log(email);
+        ref2.where("Email","==",email).get().then((querySnap)=>{
+            querySnap.forEach((doc)=>{
+            users=doc.data();
+            id=doc.id;
+            console.log(users);
+        
+        console.log(users);
+        if(otp==users.onetimepassword){
+            ref2.doc(id).delete();
+        ref.where("Email","==",email).get()
+        .then((querysnapshot)=>{
+            if(querysnapshot.docs.length>0)
+            {  querysnapshot.forEach((doc)=>{
+                    let users=doc.data();
                     let game;
-                    console.log(formgamestatus);
                     if(formgamestatus=="S")
-                    game=createGame(email,0,userName);
-                    else {
-                    addUser(0,userName,formgamecode);
-                    game=formgamecode;
+                     game=createGame(users.Email,users.Score,users.Username);
+                    else{
+                        addUser(users.Score,users.Username,formgamecode);
+                         game=formgamecode;
                     }
-                    formClick(userName,0,game);
-                }
-            })
+                    formClick(users.Username,users.Score,game); 
+            })}
+           
+        })}    })
+    })
+        
+    }
+
+    function handleSignin(e){
+        e.preventDefault();
+       
+        ref.where("Email","==",email).get()
+        .then((querysnapshot)=>{
+            if(querysnapshot.docs.length>0)
+            {  
+
+                setEnterotp(true);
+                fetch("http://localhost:5000/send",{
+                    mode: 'cors',
+                    method:"post",
+                    headers:{
+                    "Content-Type":"application/json",
+                    'Origin':'http://localhost:3001'
+                    },
+                    body:JSON.stringify({
+                    email,
+                    })
+                    }).then(res=>res.json())
+                    .then(data=>{
+                    }).catch(err=>{
+                    console.log(err)
+                    })
+            }
+            else{
+                opensignin();
+            }
+           
+        })
+        
+    }
+    function handleSubmitSignup(e){
+        e.preventDefault(); 
+        ref.add({
+            Id:uuidv4(),
+            Username:userName,
+            Email:email,
+            Age:age,
+            Gender:gender,
+            Score:0  
+        })
+            let game;
+            if(formgamestatus=="S")
+            game=createGame(email,0,userName);
+            else {
+            addUser(0,userName,formgamecode);
+            game=formgamecode;
+            }
+            formClick(userName,0,game);
+           
     }
 
     return(
@@ -133,14 +188,15 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
           
           <div className="modal-content">
           <button id="close" onClick={closeForm}>X</button>
-          <Typography color="primary" id="signintext" variant="h5">Already have an account?!</Typography>
-           <Button id="submit" id="signin" onClick={opensignin}>Sign In</Button>
+          <Typography color="primary" id="signintext" variant="h5">Dont have an account?!</Typography>
+           <Button id="submit" id="signin" onClick={opensignin}>Sign Up</Button>
           <form>
             <Typography variant="h5" color="primary">Enter Your Details</Typography>
            <br/>
-           <TextField label="User Name" variant="outlined"  color= "primary" value={userName} onChange={handleUsernameChange} /><br/><br/>
+           <TextField label="Email" variant="outlined"  color= "primary" value={email} onChange={handleEmailChange}/><br/><br/>
            
-          {signIn&&<div> <TextField label="Email" variant="outlined"  color= "primary" value={email} onChange={handleEmailChange}/><br/><br/>
+          {(!signIn)&& <Button onClick={handleSignin}>Sign In</Button>}
+          {signIn&&<div> <TextField label="User Name" variant="outlined"  color= "primary" value={userName} onChange={handleUsernameChange} /> <br/><br/>
            
            <Typography color="primary" variant="h5">Select Age</Typography><br/>
            <Select value={age} onChange={handleAgeChange}>{ageList}</Select><br/><br/>
@@ -148,10 +204,14 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
               
            <Typography color="primary" variant="h5">Select Gender</Typography><br/>
            <RadioGroup onChange={handleGenderChange}>{genderList}</RadioGroup>
-           <br/><br/></div>}
-           <Button id="submit" onClick={handleSubmit}>Submit</Button>
-           
-           
+           <br/><br/>
+           <Button id="submit" onClick={handleSubmitSignup}>Submit</Button></div>}
+           {enterotp&&
+           <div><br/>
+           <Typography color="primary" variant="h5">Enter Otp</Typography><br/>
+           <TextField label="OTP" variant="outlined" color="primary" value={otp} onChange={handleOtpChange}/><br/>
+           <br/><Button onClick={handleotp}>Submit Otp</Button>
+           </div>}
            </form>
           </div>
         </div>

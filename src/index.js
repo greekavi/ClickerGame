@@ -7,6 +7,8 @@ import { createTheme } from '@material-ui/core/styles';
 import {ThemeProvider} from '@material-ui/core';
 import {orange,yellow,amber}from '@material-ui/core/colors';
 import * as serviceworker from './serviceWorkerRegistration';
+import {BrowserRouter as Router,Switch,Route,useParams,Redirect,withRouter,useHistory} from 'react-router-dom';
+
 
 const theme=createTheme({
   palette: {
@@ -20,7 +22,9 @@ ReactDOM.render(
   <React.StrictMode>
    
   <ThemeProvider theme={theme}>
+  <Router>
     <App />
+    </Router>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
