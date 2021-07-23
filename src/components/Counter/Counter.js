@@ -8,10 +8,16 @@ import LeaderBoard from './../LeaderBoard/LeaderBoard';
 import Button from "@material-ui/core";
 import 'firebase/firestore';
 import firebase from 'firebase/app';
+import {BrowserRouter as Router,Route,Switch, useParams,useLocation} from 'react-router-dom';
 
 
 
-function Counter({CounterUsername, CounterScore,CounterGame}){
+function Counter(){
+     const location=useLocation();
+     let username=location.state.countusename;
+     let gameCode=location.state.countgame;
+     let score=location.state.countscore;
+    
     const [count,setCount]=useState(0);
     const [seconds,setSeconds]=useState(10);
     const [game,setGame]=useState(0);
@@ -40,10 +46,10 @@ useEffect(()=>{
     
     if(seconds==0)
     {
-    if(CounterScore<count)
+    if(score<count)
     {
      const ref = firebase.firestore().collection("Users");
-        ref.where("Username","==",CounterUsername).get().then((querySnap)=>{
+        ref.where("Username","==",username).get().then((querySnap)=>{
             querySnap.docs.forEach((doc)=>{
                 let Users=doc.id;
                 ref.doc(Users).update({
@@ -53,12 +59,12 @@ useEffect(()=>{
             });
         });
         const ref1 = firebase.firestore().collection("Games");
-        ref1.where("Gameid","==",CounterGame).get().then((querySnap)=>{
+        ref1.where("Gameid","==",gameCode).get().then((querySnap)=>{
             
             querySnap.docs.forEach((doc)=>{
                 let Userid=doc.id;
                 ref1.doc(Userid).update({
-                   [CounterUsername]:{ Score:count,Username:CounterUsername}
+                   [username]:{ Score:count,Username:username}
                 })
                 
                 
@@ -76,7 +82,7 @@ useEffect(()=>{
       
        
         
-        
+    console.log(username);
    const timer= setInterval(() => setSeconds(seconds - 1), 1000);
         return ()=>{clearInterval(timer);}
    },[seconds]);
@@ -84,10 +90,10 @@ useEffect(()=>{
     return (
         <div className="Game">
         <div className="Leader">
-        <LeaderBoard  Leadercommon={childLeader} leadergame={CounterGame} />
+        <LeaderBoard  Leadercommon={childLeader} leadergame={gameCode} />
         </div>
        {modal&&<Ready ReadyModal={readyModal1} />}
-           <h3 className="Welcome">Welcome {CounterUsername}</h3>
+           <h3 className="Welcome">Welcome {username}</h3>
            
            
             <Timer TimerSeconds={seconds} />
