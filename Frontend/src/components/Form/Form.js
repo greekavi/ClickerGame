@@ -162,17 +162,19 @@ function Form({formClick,closeForm,formgamecode,formgamestatus}){
         .then((querysnapshot)=>{
             if(querysnapshot.docs.length>0)
             {  
-
+             console.log(process.env.REACT_APP_FIREBASE_FETCH)
                 setEnterOtp(true);
-                fetch("http://localhost:5000/send",{
-                    mode: 'cors',
-                    method:"post",
-                    headers:{
-                    "Content-Type":"application/json",
-                    'Origin':'http://localhost:3001'
+                fetch("https://fastest-clicker-game.herokuapp.com/send",{
+                   
+                    method:"POST",
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Credentials':true,
+                        'Access-Control-Allow-Origin':'*'
                     },
                     body:JSON.stringify({
-                    email,
+                    email
                     })
                     }).then(res=>res.json())
                     .then(data=>{
